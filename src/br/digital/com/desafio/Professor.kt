@@ -1,6 +1,6 @@
 package br.digital.com.desafio
 
-class Professor (var nome: String, var sobrenome: String, var tempoDeCasa: Int, val codigo: Int){
+abstract class Professor (var nome: String, var sobrenome: String, var tempoDeCasa: Int, val codigo: Int){
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
