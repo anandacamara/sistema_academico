@@ -34,6 +34,12 @@ class DigitalHouseManager {
         }
 
     fun alocarProfessores(codigoCurso: Int, codigoProfessorTitular: Int, codigoProfessorAdjunto: Int){
+        val curso = cursos.find<Curso>(codigoCurso)
+        curso.professorTitular = professores.find(codigoProfessorTitular)
+        curso.professorAdjunto = professores.find(codigoProfessorAdjunto)
     }
 
+    private fun <T: EntidadeAcademica> MutableMap<Int, out EntidadeAcademica>.find(codigo: Int): T {
+        return this[codigo] as T? ?: throw IllegalArgumentException("CODIGO INVALIDO")
+    }
 }

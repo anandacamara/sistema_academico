@@ -2,12 +2,12 @@ package br.digital.com.desafio
 
 import java.util.*
 
-class Curso (nome: String,
-             codigo: Int,
+class Curso (override var nome: String,
+             override var codigo: Int,
              var professorTitular: ProfessorTitular,
-             val professorAdjunto: ProfessorAdjunto,
+             var professorAdjunto: ProfessorAdjunto,
              var maxAlunos: Int,
-             val alunosMatriculados: SortedSet<Aluno>): EntidadeAcademica(nome, codigo) {
+             val alunosMatriculados: SortedSet<Aluno>): EntidadeAcademica{
 
     constructor (nome: String, codigo: Int, maxAlunos: Int){
         this.nome = nome
@@ -20,7 +20,5 @@ class Curso (nome: String,
         return true
     }
 
-    fun excluirAluno(aluno: Aluno){
-        alunosMatriculados.removeIf { it.equals(aluno) }
-    }
+    fun excluirAluno(aluno: Aluno) = alunosMatriculados.removeIf { it.equals(aluno) }
 }
