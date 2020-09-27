@@ -24,19 +24,27 @@ class DigitalHouseManager {
             = alunos.put(codigo, Aluno(nome, sobrenome, codigo))
 
     fun matricularAluno(codigoAluno: Int, codigoCurso: Int){
-        val aluno = alunos.find<Aluno>(codigoAluno)
-        val curso = cursos.find<Curso>(codigoCurso)
-        if (curso.adicionarUmAluno(aluno)) {
-            matriculas.add(Matricula(aluno, curso))
-            println("Matricula realizada com sucesso!")
+        try {
+            val aluno = alunos.find<Aluno>(codigoAluno)
+            val curso = cursos.find<Curso>(codigoCurso)
+            if (curso.adicionarUmAluno(aluno)) {
+                matriculas.add(Matricula(aluno, curso))
+                println("Matricula realizada com sucesso!")
+            } else println("Impossível realizar matrícula! Não há vagas.")
         }
-        else println("Impossível realizar matrícula! Não há vagas.")
+        catch (e: IllegalArgumentException) {
+            println(e.message)}
         }
 
     fun alocarProfessores(codigoCurso: Int, codigoProfessorTitular: Int, codigoProfessorAdjunto: Int){
-        val curso = cursos.find<Curso>(codigoCurso)
-        curso.professorTitular = professores.find(codigoProfessorTitular)
-        curso.professorAdjunto = professores.find(codigoProfessorAdjunto)
+        try {
+            val curso = cursos.find<Curso>(codigoCurso)
+            curso.professorTitular = professores.find(codigoProfessorTitular)
+            curso.professorAdjunto = professores.find(codigoProfessorAdjunto)
+        }
+        catch (e: IllegalArgumentException){
+            println(e.message)
+        }
     }
 
     private fun <T: EntidadeAcademica> MutableMap<Int, out EntidadeAcademica>.find(codigo: Int): T {
