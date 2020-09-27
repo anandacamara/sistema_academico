@@ -1,7 +1,8 @@
 package br.digital.com.desafio
 
 class ProfessorTitular (nome: String,
-                        sobrenome: String,
+                        override var sobrenome: String,
                         codigo: Int,
-                        var especialidade: String): Professor(nome, sobrenome, codigo) {
+                        var especialidade: String): Professor, EntidadeAcademica(nome, codigo){
+    override var tempoDeCasa: Int = 0
 }

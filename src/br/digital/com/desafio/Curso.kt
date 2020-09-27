@@ -2,23 +2,17 @@ package br.digital.com.desafio
 
 import java.util.*
 
-class Curso (var nome: String,
-             var codigo: Int,
+class Curso (nome: String,
+             codigo: Int,
              var professorTitular: ProfessorTitular,
              val professorAdjunto: ProfessorAdjunto,
-             var maxAlunos: Int, val alunosMatriculados: SortedSet<Aluno>) {
+             var maxAlunos: Int,
+             val alunosMatriculados: SortedSet<Aluno>): EntidadeAcademica(nome, codigo) {
 
     constructor (nome: String, codigo: Int, maxAlunos: Int){
         this.nome = nome
         this.codigo = codigo
         this.maxAlunos = maxAlunos
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Curso) return false
-        if (other.codigo == codigo) return true
-        return false
     }
 
     fun adicionarUmAluno(aluno: Aluno): Boolean{
