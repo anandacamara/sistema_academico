@@ -3,10 +3,16 @@ package br.digital.com.desafio
 import java.util.*
 
 class Curso (var nome: String,
-             val codigo: Int,
-             val professorTitular: ProfessorTitular,
+             var codigo: Int,
+             var professorTitular: ProfessorTitular,
              val professorAdjunto: ProfessorAdjunto,
-             val maxAlunos: Int, val alunosMatriculados: SortedSet<Aluno>) {
+             var maxAlunos: Int, val alunosMatriculados: SortedSet<Aluno>) {
+
+    constructor (nome: String, codigo: Int, maxAlunos: Int){
+        this.nome = nome
+        this.codigo = codigo
+        this.maxAlunos = maxAlunos
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

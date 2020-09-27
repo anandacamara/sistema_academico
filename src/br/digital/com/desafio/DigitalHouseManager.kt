@@ -1,8 +1,39 @@
 package br.digital.com.desafio
 
+import java.lang.IllegalArgumentException
+
 class DigitalHouseManager {
     lateinit var alunos: MutableMap<Int, Aluno>
-    lateinit var professores: Map<Int, Professor>
-    lateinit var cursos: Map<Int, Curso>
-    lateinit var matriculas: List<Matricula>
+    lateinit var professores: MutableMap<Int, Professor>
+    lateinit var cursos: MutableMap<Int, Curso>
+    lateinit var matriculas: MutableList<Matricula>
+
+    fun registrarCurso(nome: String, codigo: Int, maxAlunos: Int) = cursos.put(codigo, Curso(nome, codigo, maxAlunos))
+
+    fun excluirCurso(codigo: Int) =  cursos.remove(codigo)
+
+    fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigo: Int, horasMonitoria: Int)
+            = professores.put(codigo, ProfessorAdjunto(nome, sobrenome, codigo, horasMonitoria))
+
+    fun registrarProfessorTitular(nome: String, sobrenome: String, codigo: Int, especialidade: String)
+            = professores.put(codigo, ProfessorTitular(nome, sobrenome, codigo, especialidade))
+
+    fun excluirProfessor(codigo: Int) = professores.remove(codigo)
+
+    fun matricularAluno(nome: String, sobrenome: String, codigo: Int)
+            = alunos.put(codigo, Aluno(nome, sobrenome, codigo))
+
+    fun matricularAluno(codigoAluno: Int, codigoCurso: Int){
+        val aluno = alunos[codigoAluno] ?: throw IllegalArgumentException("Aluno inexistente")
+        val curso = cursos[codigoCurso] ?: throw IllegalArgumentException("Curso inexistente")
+        if (curso.adicionarUmAluno(aluno)) {
+            matriculas.add(Matricula(aluno, curso))
+            println("Matricula realizada com sucesso!")
+        }
+        else println("Impossível realizar matrícula! Não há vagas.")
+        }
+
+    fun alocarProfessores(codigoCurso: Int, codigoProfessorTitular: Int, codigoProfessorAdjunto: Int){
+    }
+
 }
