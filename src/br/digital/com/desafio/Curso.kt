@@ -14,4 +14,13 @@ class Curso (var nome: String,
         if (other.codigo == codigo) return true
         return false
     }
+
+    fun adicionarUmAluno(aluno: Aluno): Boolean{
+        if (alunosMatriculados.size == maxAlunos) return false else alunosMatriculados.add(aluno)
+        return true
+    }
+
+    fun excluirAluno(aluno: Aluno){
+        alunosMatriculados.removeIf { it.equals(aluno) }
+    }
 }
