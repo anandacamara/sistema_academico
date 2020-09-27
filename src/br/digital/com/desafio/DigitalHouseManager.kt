@@ -24,8 +24,8 @@ class DigitalHouseManager {
             = alunos.put(codigo, Aluno(nome, sobrenome, codigo))
 
     fun matricularAluno(codigoAluno: Int, codigoCurso: Int){
-        val aluno = alunos[codigoAluno] ?: throw IllegalArgumentException("Aluno inexistente")
-        val curso = cursos[codigoCurso] ?: throw IllegalArgumentException("Curso inexistente")
+        val aluno = alunos.find<Aluno>(codigoAluno)
+        val curso = cursos.find<Curso>(codigoCurso)
         if (curso.adicionarUmAluno(aluno)) {
             matriculas.add(Matricula(aluno, curso))
             println("Matricula realizada com sucesso!")
@@ -40,6 +40,6 @@ class DigitalHouseManager {
     }
 
     private fun <T: EntidadeAcademica> MutableMap<Int, out EntidadeAcademica>.find(codigo: Int): T {
-        return this[codigo] as T? ?: throw IllegalArgumentException("CODIGO INVALIDO")
+        return this[codigo] as T? ?: throw IllegalArgumentException("CODIGO INVALIDO: $codigo")
     }
 }

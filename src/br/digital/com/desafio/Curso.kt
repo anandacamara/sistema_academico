@@ -1,19 +1,15 @@
 package br.digital.com.desafio
 
+import java.lang.StringBuilder
 import java.util.*
 
 class Curso (override var nome: String,
              override var codigo: Int,
-             var professorTitular: ProfessorTitular,
-             var professorAdjunto: ProfessorAdjunto,
-             var maxAlunos: Int,
-             val alunosMatriculados: SortedSet<Aluno>): EntidadeAcademica{
+             var maxAlunos: Int): EntidadeAcademica {
 
-    constructor (nome: String, codigo: Int, maxAlunos: Int){
-        this.nome = nome
-        this.codigo = codigo
-        this.maxAlunos = maxAlunos
-    }
+    lateinit var alunosMatriculados: SortedSet<Aluno>
+    lateinit var professorTitular: ProfessorTitular
+    lateinit var professorAdjunto: ProfessorAdjunto
 
     fun adicionarUmAluno(aluno: Aluno): Boolean{
         if (alunosMatriculados.size == maxAlunos) return false else alunosMatriculados.add(aluno)
@@ -21,4 +17,13 @@ class Curso (override var nome: String,
     }
 
     fun excluirAluno(aluno: Aluno) = alunosMatriculados.removeIf { it.equals(aluno) }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        sb.append("CURSO: $nome; \nCódigo: $codigo; \nNúmero máximo de alunos: $maxAlunos")
+        if (professorTitular != null) sb.append("; \n${professorTitular.toString()}")
+        if (professorAdjunto != null) sb.append("; \n${professorAdjunto.toString()}")
+        alunosMatriculados.forEach{ sb.append(it.toString()) }
+        return sb.toString()
+    }
 }
