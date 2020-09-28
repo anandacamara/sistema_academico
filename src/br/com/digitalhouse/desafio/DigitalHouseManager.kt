@@ -1,4 +1,4 @@
-package br.digital.com.desafio
+package br.com.digitalhouse.desafio
 
 import java.lang.IllegalArgumentException
 
@@ -11,7 +11,10 @@ class DigitalHouseManager {
     fun registrarCurso(nome: String, codigo: Int, maxAlunos: Int)
             = cursos.put(codigo, Curso(nome, codigo, maxAlunos))
 
-    fun excluirCurso(codigo: Int) =  cursos.remove(codigo)
+    fun excluirCurso(codigo: Int) {
+        matriculas.removeIf { it.curso.equals(cursos[codigo]) }
+        cursos.remove(codigo)
+    }
 
     fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigo: Int, horasMonitoria: Int)
             = professores.put(codigo, ProfessorAdjunto(nome, sobrenome, codigo, horasMonitoria))
@@ -19,7 +22,19 @@ class DigitalHouseManager {
     fun registrarProfessorTitular(nome: String, sobrenome: String, codigo: Int, especialidade: String)
             = professores.put(codigo, ProfessorTitular(nome, sobrenome, codigo, especialidade))
 
-    fun excluirProfessor(codigo: Int) = professores.remove(codigo)
+    fun excluirProfessor(codigo: Int) {
+        try {
+            val professor = professores.find<Professor>(codigo)
+            cursos.values.forEach {
+                if (professor.equals(it.professorTitular)) it.professorTitular = null
+                if (professor.equals(it.professorAdjunto)) it.professorAdjunto = null
+            }
+            professores.remove(codigo)
+        }
+        catch (e: IllegalArgumentException) {
+            println(e.message)
+        }
+    }
 
     fun matricularAluno(nome: String, sobrenome: String, codigo: Int)
             = alunos.put(codigo, Aluno(nome, sobrenome, codigo))
@@ -48,7 +63,7 @@ class DigitalHouseManager {
         }
     }
 
-    private fun <T: EntidadeAcademica> MutableMap<Int, out EntidadeAcademica>.find(codigo: Int): T {
+    private fun <T: EntidadeAcademica> Map<Int, out EntidadeAcademica>.find(codigo: Int): T {
         return this[codigo] as T? ?: throw IllegalArgumentException("CODIGO INVALIDO: $codigo")
     }
 }

@@ -1,4 +1,4 @@
-package br.digital.com.desafio
+package br.com.digitalhouse.desafio
 
 class ProfessorTitular (nome: String,
                         sobrenome: String,

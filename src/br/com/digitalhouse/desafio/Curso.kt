@@ -1,4 +1,4 @@
-package br.digital.com.desafio
+package br.com.digitalhouse.desafio
 
 import java.lang.StringBuilder
 import java.util.*
@@ -7,7 +7,7 @@ class Curso (override var nome: String,
              override var codigo: Int,
              var maxAlunos: Int): EntidadeAcademica {
 
-    var alunosMatriculados: SortedSet<Aluno> = sortedSetOf()
+    val alunosMatriculados: SortedSet<Aluno> = sortedSetOf()
     var professorTitular: ProfessorTitular? = null
     var professorAdjunto: ProfessorAdjunto? = null
 

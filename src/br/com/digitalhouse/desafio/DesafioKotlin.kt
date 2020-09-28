@@ -1,4 +1,4 @@
-package br.digital.com.desafio
+package br.com.digitalhouse.desafio
 
 fun main(){
 
@@ -30,7 +30,8 @@ fun main(){
     println()
     println(digitalHouseManager.cursos[20001].toString())
 
-    digitalHouseManager.excluirProfessor(1002)
+    digitalHouseManager.excluirProfessor(1003)
+    digitalHouseManager.cursos[20001]?.excluirAluno(Aluno("","", 3001))
 
     println()
     println(digitalHouseManager.cursos[20001].toString())

@@ -1,4 +1,4 @@
-package br.digital.com.desafio
+package br.com.digitalhouse.desafio
 
 class Aluno (override var nome: String, var sobrenome: String, override var codigo: Int): EntidadeAcademica, Comparable<Aluno>{
 
