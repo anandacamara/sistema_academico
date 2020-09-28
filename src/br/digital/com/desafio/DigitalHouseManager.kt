@@ -3,12 +3,13 @@ package br.digital.com.desafio
 import java.lang.IllegalArgumentException
 
 class DigitalHouseManager {
-    lateinit var alunos: MutableMap<Int, Aluno>
-    lateinit var professores: MutableMap<Int, Professor>
-    lateinit var cursos: MutableMap<Int, Curso>
-    lateinit var matriculas: MutableList<Matricula>
+    val alunos: MutableMap<Int, Aluno> = mutableMapOf()
+    val professores: MutableMap<Int, Professor> = mutableMapOf()
+    val cursos: MutableMap<Int, Curso> = mutableMapOf()
+    val matriculas: MutableList<Matricula> = mutableListOf()
 
-    fun registrarCurso(nome: String, codigo: Int, maxAlunos: Int) = cursos.put(codigo, Curso(nome, codigo, maxAlunos))
+    fun registrarCurso(nome: String, codigo: Int, maxAlunos: Int)
+            = cursos.put(codigo, Curso(nome, codigo, maxAlunos))
 
     fun excluirCurso(codigo: Int) =  cursos.remove(codigo)
 

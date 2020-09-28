@@ -7,9 +7,9 @@ class Curso (override var nome: String,
              override var codigo: Int,
              var maxAlunos: Int): EntidadeAcademica {
 
-    lateinit var alunosMatriculados: SortedSet<Aluno>
-    lateinit var professorTitular: ProfessorTitular
-    lateinit var professorAdjunto: ProfessorAdjunto
+    var alunosMatriculados: SortedSet<Aluno> = sortedSetOf()
+    var professorTitular: ProfessorTitular? = null
+    var professorAdjunto: ProfessorAdjunto? = null
 
     fun adicionarUmAluno(aluno: Aluno): Boolean{
         if (alunosMatriculados.size == maxAlunos) return false else alunosMatriculados.add(aluno)
